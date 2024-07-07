@@ -27,11 +27,11 @@ issue_using_dns_api() {
     case $APIOPTION in
         1)
         while [[ -z ${CF_Key} ]] || [[ -z ${CF_Email} ]]; do
-        CF_Key=$(whiptail --passwordbox --nocancel "https://dash.cloudflare.com/profile/api-tokens，Enter your CF Global Key" 8 68 --title "CF_Key input" 3>&1 1>&2 2>&3)
-        CF_Email=$(whiptail --inputbox --nocancel "https://dash.cloudflare.com/profile，Enter CF Email address" 8 68 --title "CF_Key input" 3>&1 1>&2 2>&3)
+        CF_Token=$(whiptail --passwordbox --nocancel "https://dash.cloudflare.com/profile/api-tokens，Enter API token(a single specific DNS zone)" 8 68 --title "CF_Token input" 3>&1 1>&2 2>&3)
+        CF_Zone_ID=$(whiptail --inputbox --nocancel "https://dash.cloudflare.com/profile，Enter CF CF_Zone_ID for domain" 8 68 --title "CF_Zone_ID input" 3>&1 1>&2 2>&3)
         done
-        export CF_Key="$CF_Key"
-        export CF_Email="$CF_Email"
+        export CF_Token="$CF_Token"
+        export CF_Zone_ID="$CF_Zone_ID"
         install_acme
         ~/.acme.sh/acme.sh --set-default-ca --server letsencrypt --issue --dns dns_cf --cert-home /etc/certs -d $domain -k ec-256 --log --reloadcmd "systemctl reload trojan nginx || true"
 crontab -l > mycron
