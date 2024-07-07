@@ -26,7 +26,7 @@ issue_using_dns_api() {
 
     case $APIOPTION in
         1)
-        while [[ -z ${CF_Key} ]] || [[ -z ${CF_Email} ]]; do
+        while [[ -z ${CF_Token} ]] || [[ -z ${CF_Zone_ID} ]]; do
         CF_Token=$(whiptail --passwordbox --nocancel "https://dash.cloudflare.com/profile/api-tokens，Enter API token(a single specific DNS zone)" 8 68 --title "CF_Token input" 3>&1 1>&2 2>&3)
         CF_Zone_ID=$(whiptail --inputbox --nocancel "https://dash.cloudflare.com/profile，Enter CF CF_Zone_ID for domain" 8 68 --title "CF_Zone_ID input" 3>&1 1>&2 2>&3)
         done
